@@ -142,6 +142,7 @@
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="coloring.h" />
     <ClInclude Include="functions.h" />
   </ItemGroup>
   <ItemGroup>

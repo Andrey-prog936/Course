@@ -26,6 +26,9 @@
     <ClInclude Include="functions.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
+    <ClInclude Include="coloring.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="level1.txt" />
