@@ -1,14 +1,16 @@
-#include "functions.h"
+п»ї#include "functions.h"
 #include<iostream>
 #include <fstream>
 #include<string>
 #include <conio.h>
+#include <stdio.h>
 #include "coloring.h"
 using namespace std;
+char S = '$';
+int selected = 0;
 void gameover()
 {
-	cout << R"( 
- ______      ___       ___  ___   ____      _____   _     _   ____   ____
+	cout << R"( ______      ___       ___  ___   ____      _____   _     _   ____   ____
 /  ___/     /   |     /   |/   | |  __|    /  _  \ | |   / / | ___| |  _ \
 | |        / /| |    / /|   /| | | |___    | | | | | |  / /  | |__  | |_| |
 | |  _    / __  |   / / |__/ | | |  ___|   | | | | | | / /   | __|  |  _ /
@@ -17,9 +19,10 @@ void gameover()
 
 )";
 }
+//###########################################################################################
 void youwin()
 {
-	cout << R"(  _     _   _____   _   _    _         _   _   _ _      _
+	cout << R"(  _     _   _____   _   _    _         _   _   _ __     _
  \ \   / / /  _  \ | | | |  | |   _   | | | | | |\ \   | |
   \ \_/ /  | | | | | | | |  | |  / \  | | | | | | \ \  | |
    \   /   | | | | | | | |  | | / _ \ | | | | | |  \ \ | |
@@ -28,7 +31,8 @@ void youwin()
 
 )";
 }
-void ze()
+//###########################################################################################
+void guid()
 {
 	green
 		cout << R"(|=-=-=-=-=-=-=-=-=-=-=-=-=-=|
@@ -50,15 +54,15 @@ void ze()
 	def
 
 }
+//###########################################################################################
 int selectLevel()
 {
-	char S = '$';
 	char symvol;
+	int point = 0;
 	const int x1 = 10, y1 = 21; char level1[x1][y1];
 	const int x2 = 17, y2 = 43; char level2[x2][y2];
 	const int x3 = 18, y3 = 49; char level3[x3][y3];
 	const int x4 = 23, y4 = 59; char level4[x4][y4];
-
 	ifstream in1("level1.txt"); // open file_1
 	for (int i = 0; i < x1; i++)
 	{
@@ -98,15 +102,13 @@ int selectLevel()
 			level4[i][j] = symvol;
 		}
 	}in4.close();
-	//######################################################
-
-	int selected = 0;
+	//#################################################
 	int oi = 1;
 	cout << "\tMAZE\nHello, select level please (1 - 4)\nYour choice: ";
 	cin >> selected;
-	while (selected > 4 || selected < 1)
+	while (selected < 1 || selected > 4)
 	{
-		if (selected > 4 || selected < 1)
+		if (selected < 1 || selected > 4)
 		{
 			oi++;
 			cout << "Please enter number (1 - 4): ";
@@ -114,7 +116,7 @@ int selectLevel()
 			if (oi > 3)
 			{
 				system("cls");
-				selectLevel(); //рекурсия 
+				selectLevel(); //СЂРµРєСѓСЂСЃРёСЏ 
 			}
 		}
 		else
@@ -122,31 +124,35 @@ int selectLevel()
 			break;
 		}
 	}
+
 	//##############################################################################################################################
+
 	system("cls");
 	switch (selected)
 	{
 	case 1:
 	{
+
 		int x = 1, y = 1;
 		level1[x][y] = S;
 		for (int i = 0; i < 10; i++)
 		{
-			for (int j = 0; j < y1; j++)
+			for (int j = 0; j < 20; j++)
 			{
 				cout << level1[i][j];
 			}
+			cout << endl;
 		}
-		cout << endl;
+		cout << "Point: " << point <<"/9"<< endl;
 		for (;;)
 		{
 			int d = _getch();
 			switch (d)
 			{
-			case 100: //вправо D
+			case 100: //ГўГЇГ°Г ГўГ® D
 			{
 				system("cls");
-				if (level1[x][y + 1] == '*')
+				if (level1[x][y + 1] == '*' || level1[x][y + 1] == '|')
 				{
 
 				}
@@ -161,6 +167,12 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level1[x][y + 1] == '@')
+				{
+					level1[x][y] = ' ';
+					level1[x][++y] = S;
+					point++;
+				}
 				else {
 					level1[x][y] = ' ';
 					level1[x][++y] = S;
@@ -170,13 +182,13 @@ int selectLevel()
 					for (int j = 0; j < 20; j++)
 					{
 						cout << level1[i][j];
-
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point <<"/9"<< endl;
 
 			}break;
-			case 97: //влево A
+			case 97: //ГўГ«ГҐГўГ® A
 			{
 				system("cls");
 				if (level1[x][y - 1] == '*')
@@ -195,6 +207,12 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level1[x][y - 1] == '@')
+				{
+					level1[x][y] = ' ';
+					level1[x][--y] = S;
+					point++;
+				}
 				else
 				{
 					level1[x][y] = ' ';
@@ -206,13 +224,13 @@ int selectLevel()
 					for (int j = 0; j < 20; j++)
 					{
 						cout << level1[i][j];
-
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point <<"/9"<< endl;
 
 			}break;
-			case 119: //вверх W
+			case 119: //ГўГўГҐГ°Гµ W
 			{
 
 				system("cls");
@@ -232,6 +250,12 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level1[x-1][y] == '@')
+				{
+					level1[x][y] = ' ';
+					level1[--x][y] = S;
+					point++;
+				}
 				else {
 					level1[x][y] = ' ';
 					level1[--x][y] = S;
@@ -242,12 +266,12 @@ int selectLevel()
 					for (int j = 0; j < 20; j++)
 					{
 						cout << level1[i][j];
-
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point <<"/9"<< endl;
 			}break;
-			case 115: //вниз S
+			case 115: //ГўГ­ГЁГ§ S
 			{
 				system("cls");
 				if (level1[x + 1][y] == '*')
@@ -267,21 +291,28 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level1[x + 1][y] == '@')
+				{
+					level1[x][y] = ' ';
+					level1[++x][y] = S;
+					point++;
+					
+				}
 				else {
 					level1[x][y] = ' ';
 					level1[++x][y] = S;
 				}
-
-
+				if (point == 9) { level1[8][17] = ' '; }
+				
 				for (int i = 0; i < 10; i++)
 				{
 					for (int j = 0; j < 20; j++)
 					{
 						cout << level1[i][j];
-
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point <<"/9"<< endl;
 			}break;
 
 			default:
@@ -305,13 +336,14 @@ int selectLevel()
 			}
 			cout << endl;
 		}
+		cout << "Point: " << point <<"/19"<< endl;
 
 		for (;;)
 		{
 			int d = _getch();
 			switch (d)
 			{
-			case 100: //вправо D
+			case 100: //ГўГЇГ°Г ГўГ® D
 			{
 
 				system("cls");
@@ -330,6 +362,12 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level2[x][y + 1] == '@')
+				{
+					level2[x][y] = ' ';
+					level2[x][++y] = S;
+					point++;
+				}
 				else {
 					level2[x][y] = ' ';
 					level2[x][++y] = S;
@@ -339,16 +377,16 @@ int selectLevel()
 					for (int j = 0; j < 42; j++)
 					{
 						cout << level2[i][j];
-
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point <<"/19"<< endl;
 
 			}break;
-			case 97: //влево A
+			case 97: //ГўГ«ГҐГўГ® A
 			{
 				system("cls");
-				if (level2[x][y - 1] == '*')
+				if (level2[x][y - 1] == '*'|| level2[x][y - 1] == '|')
 				{
 
 				}
@@ -364,6 +402,12 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level2[x][y - 1] == '@')
+				{
+					level2[x][y] = ' ';
+					level2[x][--y] = S;
+					point++;
+				}
 				else
 				{
 					level2[x][y] = ' ';
@@ -375,13 +419,13 @@ int selectLevel()
 					for (int j = 0; j < 42; j++)
 					{
 						cout << level2[i][j];
-
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point <<"/19"<< endl;
 
 			}break;
-			case 119: //вверх W
+			case 119: //ГўГўГҐГ°Гµ W
 			{
 
 				system("cls");
@@ -401,6 +445,12 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level2[x-1][y] == '@')
+				{
+					level2[x][y] = ' ';
+					level2[--x][y] = S;
+					point++;
+				}
 				else {
 					level2[x][y] = ' ';
 					level2[--x][y] = S;
@@ -411,12 +461,12 @@ int selectLevel()
 					for (int j = 0; j < 42; j++)
 					{
 						cout << level2[i][j];
-
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point <<"/19"<< endl;
 			}break;
-			case 115: //вниз S
+			case 115: //ГўГ­ГЁГ§ S
 			{
 				system("cls");
 				if (level2[x + 1][y] == '*')
@@ -436,21 +486,27 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level2[x+1][y] == '@')
+				{
+					level2[x][y] = ' ';
+					level2[++x][y] = S;
+					point++;
+				}
 				else {
 					level2[x][y] = ' ';
 					level2[++x][y] = S;
 				}
 
-
+				if (point == 19) { level2[15][34] = ' '; }
 				for (int i = 0; i < 17; i++)
 				{
 					for (int j = 0; j < 42; j++)
 					{
 						cout << level2[i][j];
-
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point <<"/19"<< endl;
 			}break;
 
 			default:
@@ -474,17 +530,18 @@ int selectLevel()
 			}
 			cout << endl;
 		}
+		cout << "Point: " << point << "/23" << endl;
 
 		for (;;)
 		{
 			int d = _getch();
 			switch (d)
 			{
-			case 100: //вправо D
+			case 100: //ГўГЇГ°Г ГўГ® D
 			{
 
 				system("cls");
-				if (level3[x][y + 1] == '*')
+				if (level3[x][y + 1] == '*'|| level3[x][y + 1] == '|')
 				{
 
 				}
@@ -499,6 +556,12 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level3[x][y+1] == '@')
+				{
+					level3[x][y] = ' ';
+					level3[x][++y] = S;
+					point++;
+				}
 				else {
 					level3[x][y] = ' ';
 					level3[x][++y] = S;
@@ -512,12 +575,13 @@ int selectLevel()
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point << "/23" << endl;
 
 			}break;
-			case 97: //влево A
+			case 97: //ГўГ«ГҐГўГ® A
 			{
 				system("cls");
-				if (level3[x][y - 1] == '*')
+				if (level3[x][y - 1] == '*'|| level3[x][y - 1] == '|')
 				{
 
 				}
@@ -533,6 +597,12 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level3[x][y-1] == '@')
+				{
+					level3[x][y] = ' ';
+					level3[x][--y] = S;
+					point++;
+				}
 				else
 				{
 					level3[x][y] = ' ';
@@ -547,9 +617,10 @@ int selectLevel()
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point << "/23"<< endl;
 
 			}break;
-			case 119: //вверх W
+			case 119: //ГўГўГҐГ°Гµ W
 			{
 
 				system("cls");
@@ -565,15 +636,20 @@ int selectLevel()
 				else if (level3[x - 1][y] == 'F')
 				{
 					system("cls");
-
 					youwin();
 					return 0;
+				}
+				else if (level3[x-1][y] == '@')
+				{
+					level3[x][y] = ' ';
+					level3[--x][y] = S;
+					point++;
 				}
 				else {
 					level3[x][y] = ' ';
 					level3[--x][y] = S;
 				}
-
+				if (point == 23) { level3[1][43] = ' '; level3[1][45] = ' '; }
 				for (int i = 0; i < 18; i++)
 				{
 					for (int j = 0; j < 48; j++)
@@ -583,8 +659,9 @@ int selectLevel()
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point<<"/23" << endl;
 			}break;
-			case 115: //вниз S
+			case 115: //ГўГ­ГЁГ§ S
 			{
 				system("cls");
 				if (level3[x + 1][y] == '*')
@@ -604,21 +681,26 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level3[x + 1][y] == '@')
+				{
+					level3[x][y] = ' ';
+					level3[++x][y] = S;
+					point++;
+				}
 				else {
 					level3[x][y] = ' ';
 					level3[++x][y] = S;
 				}
-
 
 				for (int i = 0; i < 18; i++)
 				{
 					for (int j = 0; j < 48; j++)
 					{
 						cout << level3[i][j];
-
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point << "/23" << endl;
 			}break;
 
 			default:
@@ -637,21 +719,19 @@ int selectLevel()
 			for (int j = 0; j < 58; j++)
 			{
 				cout << level4[i][j];
-
 			}
 			cout << endl;
 		}
-
+		cout << "Point: " << point << "/34" << endl;
 		for (;;)
 		{
 			int d = _getch();
 			switch (d)
 			{
-			case 100: //вправо D
+			case 100: //ГўГЇГ°Г ГўГ® D
 			{
-
 				system("cls");
-				if (level4[x][y + 1] == '*')
+				if (level4[x][y + 1] == '*'|| level4[x][y + 1] == '|')
 				{
 
 				}
@@ -666,6 +746,12 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level4[x][y+1] == '@')
+				{
+					level4[x][y] = ' ';
+					level4[x][++y] = S;
+					point++;
+				}
 				else {
 					level4[x][y] = ' ';
 					level4[x][++y] = S;
@@ -679,12 +765,12 @@ int selectLevel()
 					}
 					cout << endl;
 				}
-
+				cout << "Point: " << point << "/34" << endl;
 			}break;
-			case 97: //влево A
+			case 97: //ГўГ«ГҐГўГ® A
 			{
 				system("cls");
-				if (level4[x][y - 1] == '*')
+				if (level4[x][y - 1] == '*'|| level4[x][y - 1] == '|')
 				{
 
 				}
@@ -700,6 +786,12 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level4[x][y - 1] == '@')
+				{
+					level4[x][y] = ' ';
+					level4[x][--y] = S;
+					point++;
+				}
 				else
 				{
 					level4[x][y] = ' ';
@@ -710,13 +802,12 @@ int selectLevel()
 					for (int j = 0; j < 58; j++)
 					{
 						cout << level4[i][j];
-
 					}
 					cout << endl;
 				}
-
+				cout << "Point: " << point << "/34" << endl;
 			}break;
-			case 119: //вверх W
+			case 119: //ГўГўГҐГ°Гµ W
 			{
 
 				system("cls");
@@ -735,11 +826,16 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level4[x-1][y] == '@')
+				{
+					level4[x][y] = ' ';
+					level4[--x][y] = S;
+					point++;
+				}
 				else {
 					level4[x][y] = ' ';
 					level4[--x][y] = S;
 				}
-
 				for (int i = 0; i < 23; i++)
 				{
 					for (int j = 0; j < 58; j++)
@@ -748,8 +844,9 @@ int selectLevel()
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point << "/34" << endl;
 			}break;
-			case 115: //вниз S
+			case 115: //ГўГ­ГЁГ§ S
 			{
 				system("cls");
 				if (level4[x + 1][y] == '*')
@@ -768,12 +865,17 @@ int selectLevel()
 					youwin();
 					return 0;
 				}
+				else if (level4[x+1][y] == '@')
+				{
+					level4[x][y] = ' ';
+					level4[++x][y] = S;
+					point++;
+				}
 				else {
 					level4[x][y] = ' ';
 					level4[++x][y] = S;
 				}
-
-
+				if (point == 34) { level4[21][27] = ' ';level4[21][29] = ' ';}
 				for (int i = 0; i < 23; i++)
 				{
 					for (int j = 0; j < 58; j++)
@@ -782,6 +884,7 @@ int selectLevel()
 					}
 					cout << endl;
 				}
+				cout << "Point: " << point << "/34" << endl;
 			}break;
 
 			default:

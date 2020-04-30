@@ -7,4 +7,4 @@ using namespace std;
 int selectLevel();
 void gameover();
 void youwin();
-void ze();
+void guid();

@@ -1,3 +1,3 @@
 ﻿  functions.cpp
-E:\Course\Course\functions.cpp(804): warning C4715: selectLevel: значение возвращается не при всех путях выполнения
+E:\Course\Course\functions.cpp(902): warning C4715: selectLevel: значение возвращается не при всех путях выполнения
   Course.vcxproj -> E:\Course\Debug\Course.exe

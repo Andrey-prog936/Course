@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-	ze();
+	guid();
 	selectLevel();
 	system("pause");
 	return 0;
