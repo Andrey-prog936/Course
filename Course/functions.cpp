@@ -116,7 +116,7 @@ int selectLevel()
 			if (oi > 3)
 			{
 				system("cls");
-				selectLevel(); //рекурсия 
+				selectLevel(); // recursion 
 			}
 		}
 		else
@@ -143,7 +143,7 @@ int selectLevel()
 			}
 			cout << endl;
 		}
-		cout << "Point: " << point <<"/9"<< endl;
+		cout << "Point: " << point <<"/10"<< endl;
 		for (;;)
 		{
 			int d = _getch();
@@ -185,7 +185,7 @@ int selectLevel()
 					}
 					cout << endl;
 				}
-				cout << "Point: " << point <<"/9"<< endl;
+				cout << "Point: " << point <<"/10"<< endl;
 
 			}break;
 			case 97: //âëåâî A
@@ -227,7 +227,7 @@ int selectLevel()
 					}
 					cout << endl;
 				}
-				cout << "Point: " << point <<"/9"<< endl;
+				cout << "Point: " << point <<"/10"<< endl;
 
 			}break;
 			case 119: //ââåðõ W
@@ -269,7 +269,7 @@ int selectLevel()
 					}
 					cout << endl;
 				}
-				cout << "Point: " << point <<"/9"<< endl;
+				cout << "Point: " << point <<"/10"<< endl;
 			}break;
 			case 115: //âíèç S
 			{
@@ -302,7 +302,7 @@ int selectLevel()
 					level1[x][y] = ' ';
 					level1[++x][y] = S;
 				}
-				if (point == 9) { level1[8][17] = ' '; }
+				if (point == 10) { level1[8][17] = ' '; }
 				
 				for (int i = 0; i < 10; i++)
 				{
@@ -312,7 +312,7 @@ int selectLevel()
 					}
 					cout << endl;
 				}
-				cout << "Point: " << point <<"/9"<< endl;
+				cout << "Point: " << point <<"/10"<< endl;
 			}break;
 
 			default:
