@@ -6,5 +6,6 @@ using namespace std;
 
 int selectLevel();
 void gameover();
+int control();
 void youwin();
 void guid();

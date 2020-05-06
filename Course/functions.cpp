@@ -578,6 +578,27 @@ int selectLevel()
 				cout << "Point: " << point << "/23" << endl;
 
 			}break;
+			case 112:
+			{
+				point = 9;
+			if (point == 9)
+			{
+				system("cls");
+				for (int i = 0; i < 18; i++)
+				{
+					for (int j = 0; j < 48; j++)
+					{
+						cout << level3[i][j];
+					}
+					cout << endl;
+				}
+
+				cout << "Point: " << point << "/23" << endl;
+				cout << point << " - this is the favorite number of the author of the this game =)" << endl;
+				//This secret is only at the third level, because the favorite three-digit number 939 =)
+				Sleep(1000);
+			}
+			}
 			case 97: //âëåâî A
 			{
 				system("cls");
