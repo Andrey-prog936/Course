@@ -1,11 +1,14 @@
 ﻿#include "functions.h"
-#include<iostream>
+#include "coloring.h"
+#include <iostream>
 #include <fstream>
-#include<string>
+#include <string>
 #include <conio.h>
 #include <stdio.h>
-#include "coloring.h"
+#include <ctime>
+
 using namespace std;
+
 char S = '$';
 int selected = 0;
 void gameover()
@@ -104,7 +107,7 @@ int selectLevel()
 	}in4.close();
 	//#################################################
 	int oi = 1;
-	cout << "\tMAZE\nHello, select level please (1 - 4)\nYour choice: ";
+	cout << "\tMAZE\nHello, select level please\n1 - 10 x 20\n2 - 17 x 42\n3 - 18 x 48\n4 - 23 x 58\nYour choice: ";
 	cin >> selected;
 	while (selected < 1 || selected > 4)
 	{
@@ -124,15 +127,14 @@ int selectLevel()
 			break;
 		}
 	}
-
-	//##############################################################################################################################
-
+	//########################################################################################
 	system("cls");
+	clock_t t0 = clock();
 	switch (selected)
 	{
+		
 	case 1:
 	{
-
 		int x = 1, y = 1;
 		level1[x][y] = S;
 		for (int i = 0; i < 10; i++)
@@ -159,12 +161,16 @@ int selectLevel()
 				else if (level1[x][y + 1] == '#')
 				{
 					gameover();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds" << endl;
 					return 0;
 				}
 				else if (level1[x][y + 1] == 'F')
 				{
 					system("cls");
 					youwin();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC<<" seconds" << endl;
 					return 0;
 				}
 				else if (level1[x][y + 1] == '@')
@@ -186,7 +192,6 @@ int selectLevel()
 					cout << endl;
 				}
 				cout << "Point: " << point <<"/10"<< endl;
-
 			}break;
 			case 97: //âëåâî A
 			{
@@ -199,7 +204,6 @@ int selectLevel()
 				{
 					gameover();
 					return 0;
-
 				}
 				else if (level1[x][y - 1] == 'F')
 				{
@@ -218,7 +222,6 @@ int selectLevel()
 					level1[x][y] = ' ';
 					level1[x][--y] = S;
 				}
-
 				for (int i = 0; i < 10; i++)
 				{
 					for (int j = 0; j < 20; j++)
@@ -228,11 +231,9 @@ int selectLevel()
 					cout << endl;
 				}
 				cout << "Point: " << point <<"/10"<< endl;
-
 			}break;
 			case 119: //ââåðõ W
 			{
-
 				system("cls");
 				if (level1[x - 1][y] == '*')
 				{
@@ -246,7 +247,6 @@ int selectLevel()
 				else if (level1[x - 1][y] == 'F')
 				{
 					system("cls");
-
 					youwin();
 					return 0;
 				}
@@ -282,7 +282,6 @@ int selectLevel()
 				{
 					gameover();
 					return 0;
-
 				}
 
 				else if (level1[x + 1][y] == 'F')
@@ -321,9 +320,7 @@ int selectLevel()
 				break;
 			}
 		}
-
 	}break;
-
 	case 2:
 	{
 		int x = 1, y = 1;
@@ -345,7 +342,6 @@ int selectLevel()
 			{
 			case 100: //âïðàâî D
 			{
-
 				system("cls");
 				if (level2[x][y + 1] == '*')
 				{
@@ -381,7 +377,6 @@ int selectLevel()
 					cout << endl;
 				}
 				cout << "Point: " << point <<"/19"<< endl;
-
 			}break;
 			case 97: //âëåâî A
 			{
@@ -393,13 +388,16 @@ int selectLevel()
 				else if (level2[x][y - 1] == '#')
 				{
 					gameover();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds" << endl;
 					return 0;
-
 				}
 				else if (level2[x][y - 1] == 'F')
 				{
 					system("cls");
 					youwin();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds" << endl;
 					return 0;
 				}
 				else if (level2[x][y - 1] == '@')
@@ -413,7 +411,6 @@ int selectLevel()
 					level2[x][y] = ' ';
 					level2[x][--y] = S;
 				}
-
 				for (int i = 0; i < 17; i++)
 				{
 					for (int j = 0; j < 42; j++)
@@ -423,11 +420,9 @@ int selectLevel()
 					cout << endl;
 				}
 				cout << "Point: " << point <<"/19"<< endl;
-
 			}break;
 			case 119: //ââåðõ W
 			{
-
 				system("cls");
 				if (level2[x - 1][y] == '*')
 				{
@@ -441,7 +436,6 @@ int selectLevel()
 				else if (level2[x - 1][y] == 'F')
 				{
 					system("cls");
-
 					youwin();
 					return 0;
 				}
@@ -455,7 +449,6 @@ int selectLevel()
 					level2[x][y] = ' ';
 					level2[--x][y] = S;
 				}
-
 				for (int i = 0; i < 17; i++)
 				{
 					for (int j = 0; j < 42; j++)
@@ -477,9 +470,7 @@ int selectLevel()
 				{
 					gameover();
 					return 0;
-
 				}
-
 				else if (level2[x + 1][y] == 'F')
 				{
 					system("cls");
@@ -496,7 +487,6 @@ int selectLevel()
 					level2[x][y] = ' ';
 					level2[++x][y] = S;
 				}
-
 				if (point == 19) { level2[15][34] = ' '; }
 				for (int i = 0; i < 17; i++)
 				{
@@ -508,7 +498,6 @@ int selectLevel()
 				}
 				cout << "Point: " << point <<"/19"<< endl;
 			}break;
-
 			default:
 				cout << "\nError404\n" << endl;
 				return 0;
@@ -516,7 +505,6 @@ int selectLevel()
 			}
 		}
 	}break;
-
 	case 3:
 	{
 		int x = 1, y = 1;
@@ -526,12 +514,10 @@ int selectLevel()
 			for (int j = 0; j < 48; j++)
 			{
 				cout << level3[i][j];
-
 			}
 			cout << endl;
 		}
 		cout << "Point: " << point << "/23" << endl;
-
 		for (;;)
 		{
 			int d = _getch();
@@ -539,7 +525,6 @@ int selectLevel()
 			{
 			case 100: //âïðàâî D
 			{
-
 				system("cls");
 				if (level3[x][y + 1] == '*'|| level3[x][y + 1] == '|')
 				{
@@ -548,12 +533,16 @@ int selectLevel()
 				else if (level3[x][y + 1] == '#')
 				{
 					gameover();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds" << endl;
 					return 0;
 				}
 				else if (level3[x][y + 1] == 'F')
 				{
 					system("cls");
 					youwin();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds" << endl;
 					return 0;
 				}
 				else if (level3[x][y+1] == '@')
@@ -571,12 +560,10 @@ int selectLevel()
 					for (int j = 0; j < 48; j++)
 					{
 						cout << level3[i][j];
-
 					}
 					cout << endl;
 				}
 				cout << "Point: " << point << "/23" << endl;
-
 			}break;
 			case 112:
 			{
@@ -592,7 +579,6 @@ int selectLevel()
 					}
 					cout << endl;
 				}
-
 				cout << "Point: " << point << "/23" << endl;
 				cout << point << " - this is the favorite number of the author of the this game =)" << endl;
 				//This secret is only at the third level, because the favorite three-digit number 939 =)
@@ -609,13 +595,16 @@ int selectLevel()
 				else if (level3[x][y - 1] == '#')
 				{
 					gameover();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds" << endl;
 					return 0;
-
 				}
 				else if (level3[x][y - 1] == 'F')
 				{
 					system("cls");
 					youwin();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds" << endl;
 					return 0;
 				}
 				else if (level3[x][y-1] == '@')
@@ -634,16 +623,13 @@ int selectLevel()
 					for (int j = 0; j < 48; j++)
 					{
 						cout << level3[i][j];
-
 					}
 					cout << endl;
 				}
 				cout << "Point: " << point << "/23"<< endl;
-
 			}break;
 			case 119: //ââåðõ W
 			{
-
 				system("cls");
 				if (level3[x - 1][y] == '*')
 				{
@@ -676,7 +662,6 @@ int selectLevel()
 					for (int j = 0; j < 48; j++)
 					{
 						cout << level3[i][j];
-
 					}
 					cout << endl;
 				}
@@ -693,7 +678,6 @@ int selectLevel()
 				{
 					gameover();
 					return 0;
-
 				}
 
 				else if (level3[x + 1][y] == 'F')
@@ -712,7 +696,6 @@ int selectLevel()
 					level3[x][y] = ' ';
 					level3[++x][y] = S;
 				}
-
 				for (int i = 0; i < 18; i++)
 				{
 					for (int j = 0; j < 48; j++)
@@ -723,7 +706,6 @@ int selectLevel()
 				}
 				cout << "Point: " << point << "/23" << endl;
 			}break;
-
 			default:
 				cout << "\nError404\n" << endl;
 				return 0;
@@ -759,12 +741,16 @@ int selectLevel()
 				else if (level4[x][y + 1] == '#')
 				{
 					gameover();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds" << endl;
 					return 0;
 				}
 				else if (level4[x][y + 1] == 'F')
 				{
 					system("cls");
 					youwin();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds" << endl;
 					return 0;
 				}
 				else if (level4[x][y+1] == '@')
@@ -782,7 +768,6 @@ int selectLevel()
 					for (int j = 0; j < 58; j++)
 					{
 						cout << level4[i][j];
-
 					}
 					cout << endl;
 				}
@@ -798,6 +783,8 @@ int selectLevel()
 				else if (level4[x][y - 1] == '#')
 				{
 					gameover();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds" << endl;
 					return 0;
 
 				}
@@ -805,6 +792,8 @@ int selectLevel()
 				{
 					system("cls");
 					youwin();
+					clock_t t1 = clock();
+					cout << "Time: " << (double)(t1 - t0) / CLOCKS_PER_SEC << " seconds" << endl;
 					return 0;
 				}
 				else if (level4[x][y - 1] == '@')
@@ -919,5 +908,7 @@ int selectLevel()
 	{
 		cout << "Error404" << endl;
 	}break;
+	
 	}
+	
 }
